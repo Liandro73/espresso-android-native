@@ -33,4 +33,17 @@ class ExampleInstrumentedTest {
         onView(withText("Home")).check(matches(isDisplayed()))
     }
 
+    @Test
+    fun testLogoutSucessfully() {
+        onView(withText("Welcome")).check(matches(isDisplayed()))
+        onView(withId(R.id.editTextTextEmailAddress)).perform(typeText("liandro.sys@gmail.com"))
+        closeSoftKeyboard()
+        onView(withId(R.id.editTextTextPassword)).perform(typeText("1234567"))
+        closeSoftKeyboard()
+        onView(withId(R.id.button_login)).perform(click())
+        onView(withText("Home")).check(matches(isDisplayed()))
+        onView(withId(R.id.button_logout)).perform(click())
+        onView(withText("Welcome")).check(matches(isDisplayed()))
+    }
+
 }
