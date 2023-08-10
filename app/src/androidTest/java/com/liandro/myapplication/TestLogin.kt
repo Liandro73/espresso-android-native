@@ -4,6 +4,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.liandro.myapplication.pageObjects.constants.ConstantsHome
 import com.liandro.myapplication.pageObjects.constants.ConstantsLogin
+import com.liandro.myapplication.pageObjects.helper.PageObjectHelper
 import com.liandro.myapplication.pageObjects.robot.HomePageObject
 import com.liandro.myapplication.pageObjects.robot.LoginPageObject
 
@@ -19,6 +20,7 @@ class TestLogin {
     private val constantsLogin = ConstantsLogin()
     private val homePageObject = HomePageObject()
     private val constantsHome = ConstantsHome()
+    private val pageObjectHelper = PageObjectHelper()
 
     @get:Rule
     var mActivityRule: ActivityTestRule<MainActivity> = ActivityTestRule(MainActivity::class.java)
@@ -27,7 +29,9 @@ class TestLogin {
     fun testLoginSucessfully() {
         loginPageObject.checkTextLoginIsDisplayed(constantsLogin.TITLE_LOGIN)
         loginPageObject.fillFieldEmailAddress(constantsLogin.USER_EMAIL)
+        pageObjectHelper.hideKeyboard()
         loginPageObject.fillFieldPassword(constantsLogin.USER_PASSWORD)
+        pageObjectHelper.hideKeyboard()
         loginPageObject.clickOnLoginButton()
         homePageObject.checkTextHomeIsDisplayed(constantsHome.TITLE_HOME)
     }
@@ -36,7 +40,9 @@ class TestLogin {
     fun testLogoutSucessfully() {
         loginPageObject.checkTextLoginIsDisplayed(constantsLogin.TITLE_LOGIN)
         loginPageObject.fillFieldEmailAddress(constantsLogin.USER_EMAIL)
+        pageObjectHelper.hideKeyboard()
         loginPageObject.fillFieldPassword(constantsLogin.USER_PASSWORD)
+        pageObjectHelper.hideKeyboard()
         loginPageObject.clickOnLoginButton()
         homePageObject.checkTextHomeIsDisplayed(constantsHome.TITLE_HOME)
         homePageObject.clickOnLogoutButton()
